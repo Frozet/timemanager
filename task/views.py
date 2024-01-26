@@ -3,7 +3,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.template.loader import render_to_string
 
-menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+menu = [{'title': "О сайте", 'url_name': 'about'},
+        {'title': "Добавить статью", 'url_name': 'add_page'},
+        {'title': "Обратная связь", 'url_name': 'contact'},
+        {'title': "Войти", 'url_name': 'login'}
+]
 
 
 data_db = [
@@ -22,21 +26,19 @@ def index(request):
     return render(request, 'timemanager/index.html', context=data)
 
 def about(request):
-    return render(request, 'timemanager/about.html', {'title': 'О сайте'})
+    return render(request, 'timemanager/about.html', {'title': 'О сайте', 'menu': menu})
 
-def cats(request, cat_id):
-    return HttpResponse(f'Страница с категориями<p>id: {cat_id}</p>')
+def show_post(request, post_id):
+    return HttpResponse(f"Отображение статьи с id = {post_id}")
 
-def cats_path(request, cat_path):
-    if request.GET:
-        print(request.GET)
-    return HttpResponse(f'Страница с категориями<p>path: {cat_path}</p>')
+def addpage(request):
+    return HttpResponse("Добавление статьи")
 
-def archive(request, year):
-    if year > 2024:
-        uri = reverse('cats', args=('alo', ))
-        return HttpResponseRedirect(uri)
-    return HttpResponse(f'Архив по годам<p>year: {year}</p>')
+def contact(request):
+    return HttpResponse("Обратная связь")
+
+def login(request):
+    return HttpResponse("Авторизация")
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('Страница не найдена')

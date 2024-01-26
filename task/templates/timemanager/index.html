@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title|default:"Без заголовка"|capfirst }}</title>
-</head>
-<body>
-<p>{{ menu|join:" | " }}</p>
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>{{ title|capfirst }}</h1>
+
+{% include 'timemanager/includes/nav.html' %}
+
 
 <ul>
     {% for p in posts %}
     {% if p.is_published %}
     <li>
         <h2>{{ p.title }}</h2>
-        <p>{{ p.content }}</p>
+        {% autoescape off %}
+        <p>{{ p.content|linebreaks|truncatewords:30 }}</p>
+        {% endautoescape %}
+        <p><a href="{% url 'post' p.id %}">Читать пост</a></p>
         {% if not forloop.last %}
         <hr>
         {% endif %}
@@ -21,5 +22,10 @@
     {% endif %}
     {% endfor %}
 </ul>
+
+{% include 'timemanager/includes/nav.html' %}
+
+{% endblock %}
+
 </body>
 </html>

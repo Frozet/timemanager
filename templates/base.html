@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load task_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,6 +8,12 @@
     <link type="text/css" href="{% static 'timemanager/css/styles.css' %}" rel="stylesheet" />
 </head>
 <body>
+{% getcats as categories %}
+
+<!-- <li class="selected">Все категории</li>
+{% for cat in categories %}
+<li><a href="#">{{cat.name}}</a></li>
+{% endfor %} -->
 <ul>
     <li><a href="{% url 'home' %}">Главная страница</a></li>
     {% for m in menu %}

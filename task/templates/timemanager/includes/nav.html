@@ -1,5 +1,5 @@
 <nav>
-    <button><a href="#">cat1</a></button> |
-    <button><a href="#">cat2</a></button> |
-    <button><a href="#">cat3</a></button>
+    {% for cat in categories %}
+    <button><a href="{% url 'category' cat.id %}">{{cat.name}}</a></button>
+    {% endfor %}
 </nav>

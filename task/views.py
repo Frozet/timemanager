@@ -16,6 +16,12 @@ data_db = [
     {'id': 3, 'title': 't3', 'content': 'text3', 'is_published': True},
 ]
 
+cats_db = [
+    {'id': 1, 'name': 'cat1'},
+    {'id': 2, 'name': 'cat2'},
+    {'id': 3, 'name': 'cat3'},
+]
+
 # Create your views here.
 def index(request):
     data = {
@@ -39,6 +45,9 @@ def contact(request):
 
 def login(request):
     return HttpResponse("Авторизация")
+
+def show_category(request, cat_id):
+    return index(request)
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('Страница не найдена')

@@ -26,7 +26,7 @@ cats_db = [
 
 # Create your views here.
 def index(request):
-    posts = Task.objects.filter(is_published=1)
+    posts = Task.published.all()
     data = {
         'title': 'главная страница',
         'menu': menu,

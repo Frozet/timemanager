@@ -8,7 +8,7 @@
 
 <ul>
     {% for p in posts %}
-    {% if p.is_published %}
+
     <li>
         <h2>{{ p.title }}</h2>
         {% autoescape off %}
@@ -19,7 +19,7 @@
         <hr>
         {% endif %}
     </li>
-    {% endif %}
+
     {% endfor %}
 </ul>
 

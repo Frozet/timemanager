@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.template.loader import render_to_string
 
-from task.models import Task
+from task.models import Task, Category
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Добавить статью", 'url_name': 'add_page'},
@@ -18,11 +18,6 @@ data_db = [
     {'id': 3, 'title': 't3', 'content': 'text3', 'is_published': True},
 ]
 
-cats_db = [
-    {'id': 1, 'name': 'cat1'},
-    {'id': 2, 'name': 'cat2'},
-    {'id': 3, 'name': 'cat3'},
-]
 
 # Create your views here.
 def index(request):
@@ -56,8 +51,16 @@ def contact(request):
 def login(request):
     return HttpResponse("Авторизация")
 
-def show_category(request, cat_id):
-    return index(request)
+def show_category(request, cat_slug):
+    category = get_object_or_404(Category, slug=cat_slug)
+    posts = Task.published.filter(cat_id=category.pk)
+    data = {
+        'title': f'Рубрика: {category.name}',
+        'menu': menu,
+        'posts': posts,
+        'cat_selected': category.pk,
+    }
+    return render(request, 'timemanager/index.html', context=data)
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('Страница не найдена')

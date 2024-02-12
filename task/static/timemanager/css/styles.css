@@ -56,6 +56,7 @@ section {
     margin-bottom: 2rem;
 }
 
+
 h1, h2, h3 {
     color: #333;
     align: center;
@@ -63,7 +64,7 @@ h1, h2, h3 {
 
 button {
     background-color: #bbb;
-    color: #ddd;
+    color: #445;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: none;
@@ -72,6 +73,22 @@ button {
 
 button:hover {
     background-color: #ddd;
+}
+
+div.article-panel {
+    background: #eee;
+    padding: 5px 10px 5px 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #555;
+}
+div.article-panel p.first {
+    margin: 0;
+    float: left;
+}
+div.article-panel p.last {
+    margin: 0;
+    float: right;
 }
 
 /* Формы и ввод данных */
